@@ -1,0 +1,37 @@
+.details-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 30px auto;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 25px;
+  text-decoration: none;
+  color: black;
+}
+
+.details-card {
+  display: flex;
+  gap: 30px;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.details-card img {
+  width: 300px;
+  border-radius: 8px;
+}
+
+.details-info {
+  flex: 1;
+}
+
+.details-info h1 {
+  font-size: 32px;
+}
+
+.details-info p {
+  line-height: 1.6;
+}

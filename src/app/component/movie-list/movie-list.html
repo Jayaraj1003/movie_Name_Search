@@ -1,0 +1,84 @@
+<div class="container">
+
+  <h1>🎬 Movie Search</h1>
+
+  <div class="search-box">
+
+    <input type="text" [(ngModel)]="movieName" placeholder="Enter movie name" (keyup.enter)="searchMovie()" />
+
+    <button (click)="searchMovie()">Search</button>
+
+  </div>
+
+
+  @if (loading) {
+
+    <p class="loading">Loading movies...</p>
+
+  }
+
+
+  @if (errorMessage) {
+
+    <p class="error">{{ errorMessage }}</p>
+
+  }
+
+
+  @if (!loading && movies.length === 0 && movieName) {
+
+    <p class="no-results">No movies found.</p>
+
+  }
+
+  <div class="movie-grid">
+
+    @for (movie of movies; track movie.id) {
+
+      <a [routerLink]="['/movieList', movie.id]" class="movie-card">
+
+        @if (movie.poster_path) {
+
+          <img
+            [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+            [alt]="movie.title"
+          />
+
+        }
+
+        @else {
+
+          <div class="no-image">
+            No Image
+          </div>
+
+        }
+
+
+        <div class="movie-info">
+
+          <h2>
+            {{ movie.title }}
+          </h2>
+
+          <p>
+            {{ movie.release_date }}
+          </p>
+
+          <p>
+            ⭐ {{ movie.vote_average }}
+          </p>
+
+          <p class="overview">
+            {{ movie.overview }}
+          </p>
+
+        </div>
+
+      </a>
+
+    }
+
+  </div>
+
+</div>
