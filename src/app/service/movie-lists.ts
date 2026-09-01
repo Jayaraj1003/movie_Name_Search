@@ -26,7 +26,7 @@ export class MovieLists {
     });
   }
 
-  getMovieDetails(movieId: string) {
+  getMovieDetails(movieId: string, language: string = 'en-US') {
     const headers = new HttpHeaders({
       Accept: 'application/json',
     });
@@ -35,8 +35,8 @@ export class MovieLists {
       headers,
       params: {
         api_key: this.apiKey,
-        language: 'ta-IN',
+        language: language,
       },
     });
+    }
   }
-}

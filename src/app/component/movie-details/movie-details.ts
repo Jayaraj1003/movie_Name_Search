@@ -16,6 +16,7 @@ export class MovieDetails {
 
   movie: any = null;
   loading = true;
+  selectedLanguage = 'en-US';
 
   getGenreNames(): string {
     return this.movie?.genres?.map((genre: any) => genre.name).join(', ') || 'N/A';
@@ -24,19 +25,37 @@ export class MovieDetails {
   ngOnInit() {
     const movieId = this.route.snapshot.paramMap.get('id');
 
-    if (movieId) {
-      this.movieService.getMovieDetails(movieId).subscribe({
+    if(movieId) {this.loadMovieDetails(movieId, this.selectedLanguage);
+    } else {
+      this.loading = false;
+    }
+  }
+  loadMovieDetails(movieId: string, language: string) {
+    this.loading = true;
+
+    this.movieService.getMovieDetails(movieId, language).subscribe({
         next: (response: any) => {
           this.movie = response;
           this.loading = false;
         },
+
         error: (error: HttpErrorResponse) => {
+
           console.error('Error fetching movie details:', error);
+
           this.loading = false;
         },
       });
-    } else {
-      this.loading = false;
+  }
+  changeLanguage(language: string) {
+
+    this.selectedLanguage = language;
+
+    const movieId = this.route.snapshot.paramMap.get('id');
+
+    if (movieId) {
+
+      this.loadMovieDetails(movieId, this.selectedLanguage);
     }
   }
 }
