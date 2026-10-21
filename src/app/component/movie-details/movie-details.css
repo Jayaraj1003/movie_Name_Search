@@ -35,3 +35,23 @@
 .details-info p {
   line-height: 1.6;
 }
+
+.language-toggle {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.language-toggle button {
+  padding: 8px 18px;
+  border: 1px solid #ccc;
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.language-toggle button.active {
+  background: #333;
+  color: white;
+  border-color: #333;
+}

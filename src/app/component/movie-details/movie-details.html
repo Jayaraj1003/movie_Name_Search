@@ -1,6 +1,15 @@
+<div class="language-toggle">
+  <button
+    [class.active]="selectedLanguage === 'en-US'" (click)="changeLanguage('en-US')"> English </button>
+
+  <button
+    [class.active]="selectedLanguage === 'ta-IN'" (click)="changeLanguage('ta-IN')" > தமிழ் </button>
+</div>
+
 @if (loading) {
   <p>Loading movie details...</p>
-} @else if (movie) {
+  }
+<!--  @else if (movie) {
   <div class="details-container">
     <div class="details-card">
       <img
@@ -26,5 +35,73 @@
     </div>
   </div>
 } @else {
+  <p>Movie details are not available.</p>
+} -->
+
+@if (!loading && movie) {
+
+  <div class="movie-details">
+
+    <div class="details-info">
+
+      <h1>
+        {{ movie.title }}
+      </h1>
+
+      <img
+        [src]="movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : 'https://via.placeholder.com/500x750?text=No+Image'"
+        [alt]="movie.title"
+      />
+
+      @if (movie.tagline) {
+
+        <p>
+          <strong>Tagline:</strong>
+          {{ movie.tagline }}
+        </p>
+
+      }
+
+      <p>
+        <strong>Release Date:</strong>
+        {{ movie.release_date }}
+      </p>
+
+      <p>
+        <strong>Runtime:</strong>
+        {{ movie.runtime }} minutes
+      </p>
+
+      <p>
+        <strong>Rating:</strong>
+        ⭐ {{ movie.vote_average }}
+      </p>
+
+      <p>
+        <strong>Genres:</strong>
+        {{ getGenreNames() }}
+      </p>
+
+      <p>
+        <strong>Overview:</strong>
+        {{ movie.overview || 'No overview available.' }}
+      </p>
+
+      <p>
+        <strong>Budget:</strong>
+        ${{ movie.budget | number }}
+      </p>
+
+      <p>
+        <strong>Revenue:</strong>
+        ${{ movie.revenue | number }}
+      </p>
+
+    </div>
+
+  </div>
+
+} @else {
+  
   <p>Movie details are not available.</p>
 }
